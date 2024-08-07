@@ -6,6 +6,15 @@
   <title>Blog</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles.css">
+  <style>
+    .post-card {
+      cursor: pointer;
+    }
+    .post-card a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
   <div class="container mt-5">
@@ -15,17 +24,19 @@
     </div>
     <% if (posts && posts.length > 0) { %>
       <% posts.forEach(post => { %>
-        <div class="card mb-3">
-          <div class="card-body">
-            <h2 class="card-title"><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
-            <p class="card-text"><%= post.content %></p>
-            <p><strong>Category:</strong> <%= post.category %></p>
-            <p><strong>Tags:</strong> <%= post.tags.join(', ') %></p>
-            <a href="/edit/<%= post._id %>" class="btn btn-secondary">Edit</a>
-            <form action="/delete/<%= post._id %>" method="POST" class="d-inline">
-              <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-          </div>
+        <div class="card mb-3 post-card" onclick="location.href='/posts/<%= post._id %>';">
+          <a href="/posts/<%= post._id %>">
+            <div class="card-body">
+              <h2 class="card-title"><%= post.title %></h2>
+              <p class="card-text"><%= post.content %></p>
+              <p><strong>Category:</strong> <%= post.category %></p>
+              <p><strong>Tags:</strong> <%= post.tags.join(', ') %></p>
+              <a href="/edit/<%= post._id %>" class="btn btn-secondary">Edit</a>
+              <form action="/delete/<%= post._id %>" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </a>
         </div>
       <% }) %>
     <% } else { %>

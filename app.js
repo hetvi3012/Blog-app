@@ -39,13 +39,15 @@ app.use(flash());
 const indexRoutes = require('./routes/index');
 const createRoutes = require('./routes/create');
 const editRoutes = require('./routes/edit');
-const commentRoutes = require('./routes/comments'); // Import comment routes
+const commentRoutes = require('./routes/comments');
+const likeRoutes = require('./routes/like'); // Import like routes
 
 // Use routes
 app.use('/', indexRoutes);
 app.use('/', createRoutes);
 app.use('/', editRoutes);
-app.use('/', commentRoutes); // Use comment routes
+app.use('/', commentRoutes);
+app.use('/', likeRoutes); // Use like routes
 
 // Start the server
 const PORT = 3000;
