@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const app = express();
+const engine = require('ejs-locals');
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost:27017/blogApp', {
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/blogApp', {
 });
 
 // Set the view engine to EJS
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 
 // Use body-parser middleware

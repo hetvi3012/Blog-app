@@ -1,31 +1,30 @@
-/* public/styles.css */
-
 body {
-  font-family: Arial, sans-serif;
   background-color: #f8f9fa;
 }
 
-h1 {
-  color: #343a40;
+.navbar {
+  margin-bottom: 20px;
 }
 
-.card {
-  border-radius: 0.5rem;
+.post-card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: scale(1.05);
 }
 
 .card-title {
-  color: #007bff;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
-.btn {
-  border-radius: 0.25rem;
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
 }
 
-.btn-primary, .btn-secondary, .btn-danger {
-  margin-right: 0.5rem;
-}
-
-.container {
-  max-width: 800px;
-  margin-top: 2rem;
+.footer {
+  margin-top: 40px;
 }
