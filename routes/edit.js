@@ -1,26 +1,44 @@
 const express = require('express');
 const router = express.Router();
-const posts = require('../data'); // Import the posts array
+const Post = require('../models/Post');
 
-router.get('/edit/:id', (req, res) => {
-  const post = posts.find(p => p.id === req.params.id);
-  res.render('edit', { post });
+// Display the form for editing a post
+router.get('/edit/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.render('edit', { post });
+  } catch (err) {
+    console.error('Error retrieving post:', err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
-router.post('/edit/:id', (req, res) => {
-  const postIndex = posts.findIndex(p => p.id === req.params.id);
-  posts[postIndex] = {
-    id: req.params.id,
-    title: req.body.title,
-    content: req.body.content
-  };
-  res.redirect('/');
+// Handle the form submission to edit a post
+router.post('/edit/:id', async (req, res) => {
+  const { title, content, category, tags } = req.body;
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      title,
+      content,
+      category,
+      tags: tags ? tags.split(',').map(tag => tag.trim()) : []
+    });
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error updating post:', err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
-router.post('/delete/:id', (req, res) => {
-  const postIndex = posts.findIndex(p => p.id === req.params.id);
-  posts.splice(postIndex, 1);
-  res.redirect('/');
+// Handle deleting a post
+router.post('/delete/:id', async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error deleting post:', err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 module.exports = router;
