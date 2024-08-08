@@ -18,6 +18,10 @@
       </button>
       <span id="dislikes-count"><%= post.dislikes %> Dislikes</span>
     </div>
+
+    <form action="/delete/<%= post._id %>" method="POST" class="text-center mt-4">
+      <button type="submit" class="btn btn-danger">Delete Post</button>
+    </form>
   </div>
 </div>
 
@@ -46,19 +50,46 @@
 </form>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+  // Function to show flash message modal
+  function showFlashMessage(message) {
+    $('#flashMessage').text(message);
+    $('#flashModal').modal('show');
+  }
+
+  // Flash messages
+  const success_msg = "<%= success_msg %>";
+  const error_msg = "<%= error_msg %>";
+
+  // Check for flash messages from the server
+  if (success_msg) {
+    showFlashMessage(success_msg);
+  }
+  if (error_msg) {
+    showFlashMessage(error_msg);
+  }
+
+  // Like button click handler
   $('#like-button').click(function() {
     $.post('/posts/<%= post._id %>/like', function(data) {
       if (data.success) {
         $('#likes-count').text(data.likes + ' Likes');
+      } else {
+        showFlashMessage(data.message);
       }
     });
   });
 
+  // Dislike button click handler
   $('#dislike-button').click(function() {
     $.post('/posts/<%= post._id %>/dislike', function(data) {
       if (data.success) {
         $('#dislikes-count').text(data.dislikes + ' Dislikes');
+      } else {
+        showFlashMessage(data.message);
       }
     });
   });

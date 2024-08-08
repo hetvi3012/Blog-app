@@ -2,26 +2,24 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
 
-// Display the form for creating a new post
+// Serve the create post form
 router.get('/create', (req, res) => {
-  res.render('create');
+  res.render('create', { title: 'Create Post' });
 });
 
-// Handle the form submission to create a new post
+// Create a new post
 router.post('/create', async (req, res) => {
   const { title, content, category, tags } = req.body;
+
   try {
-    const newPost = new Post({
-      title,
-      content,
-      category,
-      tags: tags ? tags.split(',').map(tag => tag.trim()) : []
-    });
+    const newPost = new Post({ title, content, category, tags: tags.split(',') });
     await newPost.save();
+    req.flash('success_msg', 'Post created successfully');
     res.redirect('/');
   } catch (err) {
     console.error('Error creating post:', err.message);
-    res.status(500).send('Server Error');
+    req.flash('error_msg', 'Error creating post');
+    res.redirect('/create');
   }
 });
 

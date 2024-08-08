@@ -9,12 +9,16 @@
   <div class="row">
     <% posts.forEach(post => { %>
       <div class="col-md-4 mb-4">
-        <div class="card h-100 post-card" onclick="location.href='/posts/<%= post._id %>';">
+        <div class="card h-100 post-card">
           <div class="card-body">
             <h5 class="card-title"><%= post.title %></h5>
             <p class="card-text"><%= post.content.substring(0, 100) %>...</p>
             <p class="card-text"><small class="text-muted">Category: <%= post.category %></small></p>
             <p class="card-text"><small class="text-muted">Tags: <%= post.tags.join(', ') %></small></p>
+            <a href="/posts/<%= post._id %>" class="btn btn-secondary btn-sm">View</a>
+            <form action="/delete/<%= post._id %>" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
           </div>
         </div>
       </div>

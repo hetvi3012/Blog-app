@@ -37,12 +37,20 @@ app.use(session({
 // Connect flash
 app.use(flash());
 
+// Global variables for flash messages
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
+
 // Import routes
 const indexRoutes = require('./routes/index');
 const createRoutes = require('./routes/create');
 const editRoutes = require('./routes/edit');
 const commentRoutes = require('./routes/comments');
 const likeRoutes = require('./routes/like'); // Import like routes
+const deleteRoutes = require('./routes/delete'); // Import delete routes
 
 // Use routes
 app.use('/', indexRoutes);
@@ -50,6 +58,7 @@ app.use('/', createRoutes);
 app.use('/', editRoutes);
 app.use('/', commentRoutes);
 app.use('/', likeRoutes); // Use like routes
+app.use('/', deleteRoutes); // Use delete routes
 
 // Start the server
 const PORT = 3000;
