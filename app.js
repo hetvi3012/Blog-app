@@ -51,6 +51,7 @@ const editRoutes = require('./routes/edit');
 const commentRoutes = require('./routes/comments');
 const likeRoutes = require('./routes/like'); // Import like routes
 const deleteRoutes = require('./routes/delete'); // Import delete routes
+const searchRoutes = require('./routes/search'); // Import search routes
 
 // Use routes
 app.use('/', indexRoutes);
@@ -59,6 +60,7 @@ app.use('/', editRoutes);
 app.use('/', commentRoutes);
 app.use('/', likeRoutes); // Use like routes
 app.use('/', deleteRoutes); // Use delete routes
+app.use('/', searchRoutes); // Use search routes
 
 // Start the server
 const PORT = 3000;

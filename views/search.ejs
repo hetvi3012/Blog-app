@@ -1,0 +1,24 @@
+<% layout('layout') %>
+<% title = 'Search Results' %>
+
+<h1 class="text-center mb-4">Search Results for "<%= query %>"</h1>
+
+<% if (posts && posts.length > 0) { %>
+  <div class="row">
+    <% posts.forEach(post => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 post-card">
+          <div class="card-body">
+            <h5 class="card-title"><%= post.title %></h5>
+            <p class="card-text"><%= post.content.substring(0, 100) %>...</p>
+            <p class="card-text"><small class="text-muted">Category: <%= post.category %></small></p>
+            <p class="card-text"><small class="text-muted">Tags: <%= post.tags.join(', ') %></small></p>
+            <a href="/posts/<%= post._id %>" class="btn btn-secondary btn-sm">View</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } else { %>
+  <p class="text-center">No posts found matching your search criteria.</p>
+<% } %>
