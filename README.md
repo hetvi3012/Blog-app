@@ -1,4 +1,4 @@
-# My Blog App
+# Blog App
 
 ![Project Logo](path_to_your_logo_image/logo.png)
 
@@ -87,21 +87,20 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/my-blog-app.git
+   git clone https://github.com/hetvi3012/Blog-app.git
    cd my-blog-app
 
+2. **Install dependencies:**
+   ```bash
+   npm install
 
-Install dependencies:
-
-bash
-Copy code
-npm install
-Set up MongoDB:
-
-Ensure MongoDB is installed and running on your system.
-Alternatively, use a cloud-based MongoDB service like MongoDB Atlas.
-Run the application:
-
+3. **Setup MongoDB:**
+   Ensure MongoDB is installed and running on your system.
+   Alternatively, use a cloud-based MongoDB service like MongoDB Atlas.
+   
+4. **Run the application:**
+   ```bash
+   npm start 
 bash
 Copy code
 npm start
